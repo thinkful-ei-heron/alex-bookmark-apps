@@ -37,16 +37,17 @@ const addItem =
   <button id="js-new-item-cancel">CANCEL</button>`;
 
 const generateListItem = function(item){
-  $('#js-current-list').append(`<li>${item[0][1]} <a href="${item[1][1]}">Visit the Site</a></li>`);
+  $('#js-current-list').append(`<li>${item[1]} <a href="${item[2]}">Visit the Site</a></li>`);
 };
 
 const generateList = function(list) {
-  
-  let entries = Object.entries(list);
+  let entries = Object.values(list);
+  console.log(entries);
   generateListItem(entries);
 };
 
 const renderList = function() {
+  $('#js-current-list').empty();
   console.log(store.ALLMARKS.bookmarks);
   let listItems = store.ALLMARKS.bookmarks.forEach(list => generateList(list));
   if(addSwitch === true) {

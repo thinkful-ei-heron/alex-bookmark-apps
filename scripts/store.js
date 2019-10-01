@@ -1,16 +1,5 @@
 const ALLMARKS = {
-  bookmarks: [{
-    name: 'generic',
-    url: 'http://generic.com',
-    desc: 'This is a fake site',
-    rating: 5
-  }, 
-  {
-    name: 'generic2',
-    url: 'http://generic2.com',
-    desc: 'Also fake',
-    rating: 4
-  }],
+  bookmarks: [],
   adding: false,
   error: null,
   filter: 0
@@ -18,6 +7,7 @@ const ALLMARKS = {
 
 
 const addItem = function(item) {
+  ALLMARKS.bookmarks.push(item);
 };
 
 export default {
