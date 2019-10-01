@@ -1,4 +1,4 @@
-const store = [{
+const ALLMARKS = [{
   bookmarks: [{}],
   adding: false,
   error: null,
@@ -7,5 +7,9 @@ const store = [{
 
 
 const addItem = function(item) {
-  return this.store.bookmarks.push(item);
+  return this.ALLMARKS.bookmarks.push(item);
+};
+
+export default {
+  ALLMARKS
 };

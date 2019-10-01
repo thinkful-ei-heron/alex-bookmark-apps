@@ -15,7 +15,7 @@ const baseFetch = function(url, obj) {
     .then(data => {
       if (error) {
         error.message = data.message;
-        store.error = error.message;
+        store.ALLMARKS.error = error.message;
         return Promise.reject(error);
       }
       console.log(data);
@@ -27,8 +27,11 @@ const populateItems = function() {
   return baseFetch(url);
 };
 
-const addItem = function() {
-
+const addItem = function(newItem) {
+  return baseFetch(`${url}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: newItem });
 };
 
 const deleteItem = function() {
@@ -38,3 +41,8 @@ const deleteItem = function() {
 const editItem = function() {
 
 };
+
+export default {
+  addItem,
+  populateItems
+}
