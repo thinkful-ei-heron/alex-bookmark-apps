@@ -15,14 +15,6 @@ const landingPage =
     <option>5</option>
   </select>
 </form>
-</div>
-<div class="list-of-bookmarks">
-<ul>
-  <li>#1</li>
-  <li>#2</li>
-  <li>#3</li>
-  <li>#4</li>
-</ul>
 </div>`;
 
 const addItem =
@@ -44,16 +36,28 @@ const addItem =
 </form>
   <button id="js-new-item-cancel">CANCEL</button>`;
 
-const renderList = function() {
+const generateListItem = function(item){
+  $('#js-current-list').append(`<li>${item[0][1]} <a href="${item[1][1]}">Visit the Site</a></li>`);
+};
+
+const generateList = function(list) {
   
+  let entries = Object.entries(list);
+  generateListItem(entries);
+};
+
+const renderList = function() {
+  console.log(store.ALLMARKS.bookmarks);
+  let listItems = store.ALLMARKS.bookmarks.forEach(list => generateList(list));
   if(addSwitch === true) {
     $('#js-list-landing').empty();
     $('#js-list-landing').html(addItem);
+    $('#js-current-list').html(listItems);
     addSwitch = !addSwitch;
   }
   else {
-    api.populateItems();
     $('#js-list-landing').html(landingPage);
+    $('#js-current-list').html(listItems);
   }
 };
 

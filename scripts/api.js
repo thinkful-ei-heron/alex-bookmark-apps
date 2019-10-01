@@ -24,7 +24,7 @@ const baseFetch = function(url, obj) {
 };
 
 const populateItems = function() {
-  return baseFetch(url);
+
 };
 
 const addItem = function(newItem) {
@@ -45,4 +45,4 @@ const editItem = function() {
 export default {
   addItem,
   populateItems
-}
+};

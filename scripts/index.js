@@ -1,9 +1,9 @@
 import bookmarklist from './bookmarklist.js';
 import store from './store.js';
-
-console.log(store.ALLMARKS);
+import api from './api.js';
 
 const main = function() {
+
   bookmarklist.renderList();
   bookmarklist.bindEventListeners();
 };
