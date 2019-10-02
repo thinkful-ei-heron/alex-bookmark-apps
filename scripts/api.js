@@ -18,7 +18,6 @@ const baseFetch = function(url, obj) {
         store.ALLMARKS.error = error.message;
         return Promise.reject(error);
       }
-      console.log(data);
       return data;
     });
 };

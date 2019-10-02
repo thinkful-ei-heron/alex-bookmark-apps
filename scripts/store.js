@@ -9,24 +9,30 @@ const ALLMARKS = {
 
 const changeFilter = function(num) {
   this.ALLMARKS.filter = num;
-  console.log(num);
   bookmarklist.renderList();
 };
 
 const deleteItem = function(id) {
   this.ALLMARKS.bookmarks = this.ALLMARKS.bookmarks.filter(current => current.id !== id);
-  console.log(this.ALLMARKS.bookmarks);
 };
 
 const addItem = function(item) {
+  item.expanded = false;
   this.ALLMARKS.bookmarks.push(item);
   bookmarklist.renderList();
-  console.log(this.ALLMARKS.bookmarks);
+};
+
+const expandItem = function(id) {
+  const changeMark = this.ALLMARKS.bookmarks.find(currentItem => currentItem.id === id);
+  changeMark.expanded = !changeMark.expanded;
+  console.log(changeMark);
+  bookmarklist.renderList();
 };
 
 export default {
   ALLMARKS,
   addItem,
   deleteItem,
-  changeFilter
+  changeFilter,
+  expandItem
 };

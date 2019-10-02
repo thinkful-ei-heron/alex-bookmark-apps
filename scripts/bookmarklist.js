@@ -37,23 +37,28 @@ const addItem =
 </form>
   <button id="js-new-item-cancel">CANCEL</button>`;
 
-const generateListItem = function(title, url, description, rating, id){
-  if(parseInt(rating) >= store.ALLMARKS.filter){
-    $('#js-current-list').append(`<button type="button" class="collapsible"><li>${title} <span id="rating-style">RATING: ${rating}</span><button id="${id}" class="js-delete-button">&times;</button><section id="full-content" class="content hidden"><span>${url}</span><span>${description}</span></section></button>`);
+const generateListItem = function(title, url, description, rating, id, expand){
+  if(expand === true){
+    $('#js-current-list').append(`<button  type="button" class="collapsible" id=${id}><li >${title} <span id="rating-style">RATING: ${rating}</span><button id="${id}" class="js-delete-button">&times;</button><section id="full-content" class="content hidden"><span>${url}</span><span>${description}</span></section></button>`);
   }
-  else{
-    $('#js-current-list').append('');
+  else {
+    if(parseInt(rating) >= store.ALLMARKS.filter){
+      $('#js-current-list').append(`<button type="button" class="collapsible" id=${id}><li>${title} <span id="rating-style">RATING: ${rating}</span><button id="${id}" class="js-delete-button">&times;</button></button>`);
+    }
+    else{
+      $('#js-current-list').append('');
+    }
   }
 };
 
 const generateList = function(obj) {
-  console.log(obj);
   let title = obj.title;
   let url = obj.url;
   let description = obj.desc;
   let rating = obj.rating;
   let id = obj.id;
-  generateListItem(title, url, description, rating, id);
+  let expand = obj.expanded;
+  generateListItem(title, url, description, rating, id, expand);
 };
 
 const renderList = function() {
@@ -83,7 +88,6 @@ function serializeJson(form) {
 //works
 const handleCancel = function() {
   $('#js-list-landing').on('click', '#js-new-item-cancel', function(e){
-    console.log('cancel');
     renderList();
   });
 };
@@ -101,8 +105,7 @@ const makeNewItem = function() {
 
 const handleNewItemSubmit = function() {
   $('#js-list-landing').on('click', '#js-new-item-button', function(e) {
-    console.log('CLICK');
-    // e.preventDefault();
+    e.preventDefault();
     addSwitch = !addSwitch;
     renderList();
     makeNewItem();
@@ -111,8 +114,7 @@ const handleNewItemSubmit = function() {
 
 const handleItemDelete = function() {
   $('#js-current-list').on('click', '.js-delete-button', function(e){
-    e.preventDefault;
-    console.log('DELETE ME');
+    e.preventDefault();
     let itemId = $(this).attr('id');
     api.deleteItem(itemId)
       .then((result) => {
@@ -137,15 +139,9 @@ const handleFilter = function() {
 
 const handleItemDetails = function() {
   $('body').on('click', '.collapsible', function(e){
-    console.log($(event.target));
-    let accordion = $(event.target).closest('#full-content').get();
-    if(accordion.hasClass('hidden')){
-      accordion.removeClass('hidden');
-    }
-    else {
-      accordion.addClass('hidden');
-    }
-    console.log(accordion);
+    e.preventDefault();
+    let itemId = $(this).attr('id');
+    store.expandItem(itemId);
   });
 };
 
@@ -154,7 +150,6 @@ const handleItemEdit = function() {
 };
 
 const bindEventListeners = function() {
-  console.log('listening');
   handleNewItemSubmit();
   handleItemDelete();
   handleItemDetails();
