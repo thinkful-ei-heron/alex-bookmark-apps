@@ -8,7 +8,8 @@ const landingPage =
   <button class="landing-button" id="js-new-item-button" type="submit">New</button>
 <form>
   <select class="landing-button" id="js-filter-button" type="submit" name="Filter">
-    <option>All</option>
+    <option>Filter by Minimum Rating</option>
+    <option>1</option>
     <option>2</option>
     <option>3</option>
     <option>4</option>
@@ -37,7 +38,12 @@ const addItem =
   <button id="js-new-item-cancel">CANCEL</button>`;
 
 const generateListItem = function(item){
-  $('#js-current-list').append(`<button type="button" class="collapsible"><li>${item[1]} ${item[4]} <button id="${item[0]}" class="js-delete-button">&times;</button><section id="#full-content" class="content hidden"><span>${item[2]}</span><span>${item[3]}</span></section>`);
+  if(parseInt(item[4]) >= store.ALLMARKS.filter){
+    $('#js-current-list').append(`<button type="button" class="collapsible"><li>${item[1]} ${item[4]} <button id="${item[0]}" class="js-delete-button">&times;</button><section id="#full-content" class="content hidden"><span>${item[2]}</span><span>${item[3]}</span></section></button>`);
+  }
+  else{
+    $('#js-current-list').append('');
+  }
 };
 
 {/* <button type="button" class="collapsible">Open Collapsible</button> */}
@@ -120,21 +126,16 @@ const handleItemDelete = function() {
 
 
 const handleFilter = function() {
-
+  $('#js-list-landing').on('change', '#js-filter-button', function(e){
+    e.preventDefault();
+    store.changeFilter(this.value);
+  });
 };
 
 const handleItemDetails = function() {
-  // $('#js-current-list').on('click', '.collapsible', function(e){
-  //   console.log($('button').closest('.hidden'));
-  //   if( $('.collapsible').closest('section').hasClass('hidden') ) {
-  //     console.log('It\'s hiding!');
-  //     // $('.content').removeClass('.hidden');
-  //   }
-  //   else {
-  //     console.log($('#js-current-list').closest('section'));
-  //   }
-  //   console.log('EXPAND');
-  // });
+  $('#js-current-list').on('click', '.collapsible', function(e){
+    console.log('EXPAND');
+  });
 };
 
 const handleItemEdit = function() {

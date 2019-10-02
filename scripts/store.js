@@ -1,8 +1,16 @@
+import bookmarklist from './bookmarklist.js';
+
 const ALLMARKS = {
   bookmarks: [],
   adding: false,
   error: null,
   filter: 0
+};
+
+const changeFilter = function(num) {
+  ALLMARKS.filter = num;
+  console.log(num);
+  bookmarklist.renderList();
 };
 
 const deleteItem = function(item) {
@@ -16,5 +24,6 @@ const addItem = function(item) {
 export default {
   ALLMARKS,
   addItem,
-  deleteItem
+  deleteItem,
+  changeFilter
 };
