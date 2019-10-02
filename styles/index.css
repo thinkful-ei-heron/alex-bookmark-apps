@@ -132,4 +132,7 @@ ul {
   main{
     font-size: 1.3em;
   }
+  .js-delete-button {
+    line-height: 1;
+  }
 }

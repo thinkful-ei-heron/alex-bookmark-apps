@@ -125,11 +125,9 @@ const handleItemDelete = function() {
     api.deleteItem(itemId)
       .then((result) => {
         store.deleteItem(itemId);
-        console.log(itemId, store.ALLMARKS.bookmarks);
         renderList();
       })
       .catch((err) => {
-        console.log(err);
         renderList();
       });
   });
