@@ -80,3 +80,49 @@ ul {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+.collapsible {
+  padding: 3px;
+}
+@media only screen and (min-width: 500px) {
+  #js-list-landing{
+    padding: 20px;
+  }
+
+  #js-new-item-button{
+    width: 20%;
+    height: 40px;
+    font-weight: bold;
+  }
+  #js-filter-button{
+    width: 20%;
+    height: 40px;
+    font-weight: bold;
+  }
+
+  .js-delete-button {
+    font-size: 2em;
+  }
+  
+  #js-current-list{
+   text-align: center;
+ }
+  .collapsible{
+   width: 80%;
+   height: 50px;
+   font-size: 1.3em;
+ }
+ #full-content{
+   margin-left: 15%;
+   margin-right: 15%;
+ }
+}
+
+@media only screen and (min-width: 900px){
+  header{
+    font-size: 1.5em;
+  }
+  main{
+    font-size: 1.3em;
+  }
+}
