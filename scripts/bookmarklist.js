@@ -62,6 +62,12 @@ const generateList = function(obj) {
 };
 
 const renderList = function() {
+  if(store.ALLMARKS.error !== null) {
+    $('#js-error-landing').html(`<h2>There has been an error: ${store.ALLMARKS.error}</h2>`);
+  }
+  else {
+    $('#js-error-landing').empty();
+  }
   $('#js-current-list').empty();
   let listItems = store.ALLMARKS.bookmarks.forEach(obj => generateList(obj));
   if(addSwitch === true) {
@@ -124,6 +130,7 @@ const handleItemDelete = function() {
       })
       .catch((err) => {
         console.log(err);
+        renderList();
       });
   });
 };

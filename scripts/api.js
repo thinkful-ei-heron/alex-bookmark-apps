@@ -15,10 +15,14 @@ const baseFetch = function(url, obj) {
     .then(data => {
       if (error) {
         error.message = data.message;
-        store.ALLMARKS.error = error.message;
         return Promise.reject(error);
       }
+      store.ALLMARKS.error = null;
       return data;
+    })
+    .catch(error => {
+      store.ALLMARKS.error = error.message;
+      return Promise.reject(error);
     });
 };
 

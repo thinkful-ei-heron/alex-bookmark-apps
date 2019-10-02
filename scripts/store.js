@@ -25,7 +25,6 @@ const addItem = function(item) {
 const expandItem = function(id) {
   const changeMark = this.ALLMARKS.bookmarks.find(currentItem => currentItem.id === id);
   changeMark.expanded = !changeMark.expanded;
-  console.log(changeMark);
   bookmarklist.renderList();
 };
 
