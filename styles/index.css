@@ -1,0 +1,82 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Be Vietnam', sans-serif;
+}
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  text-align: center;
+}
+main {
+  width: 90%;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  padding: 10px;
+  flex-direction: column;
+  align-items: center;
+}
+button{
+  width: 100%;
+  text-align: left;
+}
+.submit-buttons{
+  text-align: center;
+  
+}
+#js-new-item-button{
+  text-align: left;
+  float: left;
+  width: 50%;
+  border: 1px solid black;
+  background-color: whitesmoke;
+  height: 30px;
+}
+#js-filter-button{
+  width: 50%;
+  float: right;
+  border: 1px solid black;
+  background-color: whitesmoke;
+  height: 30px;
+}
+
+ul {
+  list-style: none;
+  padding-top: 20px;
+  padding-left: initial;
+}
+
+#rating-style {  
+  float: right;
+  color: firebrick;
+}
+
+.js-delete-button {
+  font-weight: bolder;
+  font-size: 1em;
+  position: absolute;
+  width: 10%;
+  border: none;
+  background-color: white;
+}
+
+#full-content {
+  border: 1px solid black;
+  padding: 5px;
+  background-color: darkgrey;
+}
+
+#link-to-website {
+  float: right;
+}
+
+.new-item {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

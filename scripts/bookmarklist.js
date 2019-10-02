@@ -5,10 +5,10 @@ let addSwitch = store.ALLMARKS.adding;
 const landingPage = 
 `
 <div class="submit-buttons">
-  <button class="landing-button" id="js-new-item-button" type="submit">New</button>
-<form>
+  <button class="landing-button" id="js-new-item-button" type="submit">New Bookmark</button>
+<form id="filter-select">
   <select class="landing-button" id="js-filter-button" type="submit" name="Filter">
-    <option>Filter by Minimum Rating</option>
+    <option>Filter by Rating</option>
     <option>1</option>
     <option>2</option>
     <option>3</option>
@@ -20,12 +20,12 @@ const landingPage =
 
 const addItem =
 `<form id="new-item-submit">
-  <input type="text" name="title" placeholder="Insert the name for your bookmark..." required>
-  <div><input type="url" name="url" placeholder="Insert the url for your bookmark..." required></div>
-  <div><textarea name="desc">
+  <input class="new-item" type="text" name="title" placeholder="Insert the name for your bookmark..." required>
+  <div><input class="new-item" type="url" name="url" placeholder="Insert the url for your bookmark..." required></div>
+  <div><textarea class="new-item" name="desc" id="bookmark-description">
     Add a description of your bookmark.  
   </textarea></div>
-  <div><select id="rating" type="submit" name="rating">
+  <div><select class="new-item" id="rating" type="submit" name="rating">
     <option>Choose a Rating</option>
     <option>1</option>
     <option>2</option>
@@ -39,11 +39,11 @@ const addItem =
 
 const generateListItem = function(title, url, description, rating, id, expand){
   if(expand === true){
-    $('#js-current-list').append(`<button  type="button" class="collapsible" id=${id}><li >${title} <span id="rating-style">RATING: ${rating}</span><button id="${id}" class="js-delete-button">&times;</button><section id="full-content" class="content hidden"><span>${url}</span><span>${description}</span></section></button>`);
+    $('#js-current-list').append(`<li><button type="button" class="collapsible" id=${id}>${title}<span id="rating-style">RATING: ${rating}</span><button id="${id}" class="js-delete-button">&times;</button><section id="full-content"><span id="description-of-bookmark">${description}</span><a id="link-to-website" href='${url}'>Visit Site</a></span></section></button></li>`);
   }
   else {
     if(parseInt(rating) >= store.ALLMARKS.filter){
-      $('#js-current-list').append(`<button type="button" class="collapsible" id=${id}><li>${title} <span id="rating-style">RATING: ${rating}</span><button id="${id}" class="js-delete-button">&times;</button></button>`);
+      $('#js-current-list').append(`<li><button type="button" class="collapsible" id=${id}>${title} <span id="rating-style">RATING: ${rating}</span><button id="${id}" class="js-delete-button">&times;</button></button></li>`);
     }
     else{
       $('#js-current-list').append('');
