@@ -37,21 +37,20 @@ const addItem =
   <button id="js-new-item-cancel">CANCEL</button>`;
 
 const generateListItem = function(item){
-  $('#js-current-list').append(`<li>${item[1]} <a href="${item[2]}">Visit the Site</a></li>`);
+  $('#js-current-list').append(`<li>${item[1]} <a href="${item[4]}`);
 };
 
 const generateList = function(list) {
   let entries = Object.values(list);
-  console.log(entries);
   generateListItem(entries);
 };
 
 const renderList = function() {
   $('#js-current-list').empty();
-  console.log(store.ALLMARKS.bookmarks);
   let listItems = store.ALLMARKS.bookmarks.forEach(list => generateList(list));
   if(addSwitch === true) {
     $('#js-list-landing').empty();
+    $('#js-current-list').empty();
     $('#js-list-landing').html(addItem);
     $('#js-current-list').html(listItems);
     addSwitch = !addSwitch;
@@ -62,6 +61,7 @@ const renderList = function() {
   }
 };
 
+//works
 function serializeJson(form) {
   const formData = new FormData(form);
   const o = {};
@@ -69,17 +69,28 @@ function serializeJson(form) {
   return JSON.stringify(o);
 }
 
+//works
+const handleCancel = function() {
+  $('#js-list-landing').on('click', '#js-new-item-cancel', function(e){
+    console.log('cancel');
+    renderList();
+  });
+};
+
+
 const makeNewItem = function() {
   $('#new-item-submit').submit(e => {
     e.preventDefault();
     let formElement = $('#new-item-submit')[0];
     api.addItem(serializeJson(formElement));
+    renderList();
   });
 };
 
 const handleNewItemSubmit = function() {
-  $('#js-new-item-button').click(e => {
-    e.preventDefault();
+  $('#js-list-landing').on('click', '#js-new-item-button', function(e) {
+    console.log('CLICK');
+    // e.preventDefault();
     addSwitch = !addSwitch;
     renderList();
     makeNewItem();
@@ -103,11 +114,13 @@ const handleItemEdit = function() {
 };
 
 const bindEventListeners = function() {
+  console.log('listening');
   handleNewItemSubmit();
   handleItemDelete();
   handleItemDetails();
   handleFilter();
   handleItemEdit();
+  handleCancel();
 };
 
 export default {
