@@ -34,7 +34,10 @@ const addItem = function(newItem) {
     body: newItem });
 };
 
-const deleteItem = function() {
+const deleteItem = function(itemId) {
+  return baseFetch(url + `/${itemId}`, {
+    method: 'DELETE'
+  });
 
 };
 
@@ -44,5 +47,6 @@ const editItem = function() {
 
 export default {
   addItem,
-  populateItems
+  populateItems,
+  deleteItem
 };

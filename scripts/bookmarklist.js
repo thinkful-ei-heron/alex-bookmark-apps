@@ -37,7 +37,7 @@ const addItem =
   <button id="js-new-item-cancel">CANCEL</button>`;
 
 const generateListItem = function(item){
-  $('#js-current-list').append(`<li>${item[1]} <a href="${item[4]}`);
+  $('#js-current-list').append(`<li >${item[1]} ${item[4]} <button id="${item[0]}" class="js-delete-button">&times;</button>`);
 };
 
 const generateList = function(list) {
@@ -98,8 +98,22 @@ const handleNewItemSubmit = function() {
 };
 
 const handleItemDelete = function() {
-
+  $('#js-current-list').on('click', '.js-delete-button', function(e){
+    e.preventDefault;
+    console.log('DELETE ME');
+    let itemId = $(this).attr('id');
+    api.deleteItem(itemId)
+      .then(() => {
+        store.deleteItem(itemId);
+        renderList();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 };
+
+
 
 const handleFilter = function() {
 

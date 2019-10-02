@@ -5,6 +5,9 @@ const ALLMARKS = {
   filter: 0
 };
 
+const deleteItem = function(item) {
+  ALLMARKS.bookmarks = ALLMARKS.bookmarks.filter(current => current.item !== item);
+};
 
 const addItem = function(item) {
   ALLMARKS.bookmarks.push(item);
@@ -12,5 +15,6 @@ const addItem = function(item) {
 
 export default {
   ALLMARKS,
-  addItem
+  addItem,
+  deleteItem
 };
