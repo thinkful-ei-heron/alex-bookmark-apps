@@ -37,8 +37,12 @@ const addItem =
   <button id="js-new-item-cancel">CANCEL</button>`;
 
 const generateListItem = function(item){
-  $('#js-current-list').append(`<li >${item[1]} ${item[4]} <button id="${item[0]}" class="js-delete-button">&times;</button>`);
+  $('#js-current-list').append(`<button type="button" class="collapsible"><li>${item[1]} ${item[4]} <button id="${item[0]}" class="js-delete-button">&times;</button><section id="#full-content" class="content hidden"><span>${item[2]}</span><span>${item[3]}</span></section>`);
 };
+
+{/* <button type="button" class="collapsible">Open Collapsible</button> */}
+
+
 
 const generateList = function(list) {
   let entries = Object.values(list);
@@ -120,7 +124,17 @@ const handleFilter = function() {
 };
 
 const handleItemDetails = function() {
-
+  // $('#js-current-list').on('click', '.collapsible', function(e){
+  //   console.log($('button').closest('.hidden'));
+  //   if( $('.collapsible').closest('section').hasClass('hidden') ) {
+  //     console.log('It\'s hiding!');
+  //     // $('.content').removeClass('.hidden');
+  //   }
+  //   else {
+  //     console.log($('#js-current-list').closest('section'));
+  //   }
+  //   console.log('EXPAND');
+  // });
 };
 
 const handleItemEdit = function() {
