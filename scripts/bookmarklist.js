@@ -37,27 +37,28 @@ const addItem =
 </form>
   <button id="js-new-item-cancel">CANCEL</button>`;
 
-const generateListItem = function(item){
-  if(parseInt(item[4]) >= store.ALLMARKS.filter){
-    $('#js-current-list').append(`<button type="button" class="collapsible"><li>${item[1]} ${item[4]} <button id="${item[0]}" class="js-delete-button">&times;</button><section id="#full-content" class="content hidden"><span>${item[2]}</span><span>${item[3]}</span></section></button>`);
+const generateListItem = function(title, url, description, rating, id){
+  if(parseInt(rating) >= store.ALLMARKS.filter){
+    $('#js-current-list').append(`<button type="button" class="collapsible"><li>${title} <span id="rating-style">RATING: ${rating}</span><button id="${id}" class="js-delete-button">&times;</button><section id="full-content" class="content hidden"><span>${url}</span><span>${description}</span></section></button>`);
   }
   else{
     $('#js-current-list').append('');
   }
 };
 
-{/* <button type="button" class="collapsible">Open Collapsible</button> */}
-
-
-
-const generateList = function(list) {
-  let entries = Object.values(list);
-  generateListItem(entries);
+const generateList = function(obj) {
+  console.log(obj);
+  let title = obj.title;
+  let url = obj.url;
+  let description = obj.desc;
+  let rating = obj.rating;
+  let id = obj.id;
+  generateListItem(title, url, description, rating, id);
 };
 
 const renderList = function() {
   $('#js-current-list').empty();
-  let listItems = store.ALLMARKS.bookmarks.forEach(list => generateList(list));
+  let listItems = store.ALLMARKS.bookmarks.forEach(obj => generateList(obj));
   if(addSwitch === true) {
     $('#js-list-landing').empty();
     $('#js-current-list').empty();
@@ -92,7 +93,8 @@ const makeNewItem = function() {
   $('#new-item-submit').submit(e => {
     e.preventDefault();
     let formElement = $('#new-item-submit')[0];
-    api.addItem(serializeJson(formElement));
+    api.addItem(serializeJson(formElement))
+      .then(item => store.addItem(item));
     renderList();
   });
 };
@@ -113,8 +115,9 @@ const handleItemDelete = function() {
     console.log('DELETE ME');
     let itemId = $(this).attr('id');
     api.deleteItem(itemId)
-      .then(() => {
+      .then((result) => {
         store.deleteItem(itemId);
+        console.log(itemId, store.ALLMARKS.bookmarks);
         renderList();
       })
       .catch((err) => {
@@ -133,8 +136,16 @@ const handleFilter = function() {
 };
 
 const handleItemDetails = function() {
-  $('#js-current-list').on('click', '.collapsible', function(e){
-    console.log('EXPAND');
+  $('body').on('click', '.collapsible', function(e){
+    console.log($(event.target));
+    let accordion = $(event.target).closest('#full-content').get();
+    if(accordion.hasClass('hidden')){
+      accordion.removeClass('hidden');
+    }
+    else {
+      accordion.addClass('hidden');
+    }
+    console.log(accordion);
   });
 };
 
@@ -150,6 +161,7 @@ const bindEventListeners = function() {
   handleFilter();
   handleItemEdit();
   handleCancel();
+  generateListItem();
 };
 
 export default {
